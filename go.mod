@@ -1,4 +1,4 @@
-module github.com/pariahGH/diff/fix
+module github.com/pariahGH/diff
 
 go 1.13
 

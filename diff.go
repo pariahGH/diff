@@ -257,7 +257,7 @@ func idComplex(v interface{}) string {
 	case string:
 		return v
 	case int:
-		return strconv.Itoa(v)
+		return strconv.Itoa(v.(int))
 	default: */
 	b, err := msgpack.Marshal(v)
 	if err != nil {
