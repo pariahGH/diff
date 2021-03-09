@@ -254,18 +254,16 @@ func swapChange(t string, c Change) Change {
 }
 
 func idComplex(v interface{}) string {
-	/* switch v.(type) {
-	case string:
-		return v
+	switch v.(type) {
 	case int:
 		return strconv.Itoa(v.(int))
-	default: */
-	b, err := msgpack.Marshal(v)
-	if err != nil {
-		panic(err)
+	default:
+		b, err := msgpack.Marshal(v)
+		if err != nil {
+			panic(err)
+		}
+		return base64.StdEncoding.EncodeToString(b)
 	}
-	return base64.StdEncoding.EncodeToString(b)
-	//}
 
 }
 func idstring(v interface{}) string {
