@@ -5,6 +5,7 @@
 package diff
 
 import (
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"reflect"
@@ -263,7 +264,7 @@ func idComplex(v interface{}) string {
 	if err != nil {
 		panic(err)
 	}
-	return string(b)
+	return base64.StdEncoding.EncodeToString(b)
 	//}
 
 }

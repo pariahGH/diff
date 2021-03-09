@@ -1,6 +1,7 @@
 package diff
 
 import (
+	"encoding/base64"
 	"reflect"
 
 	"github.com/vmihailenco/msgpack"
@@ -12,7 +13,13 @@ func (d *Differ) renderMap(c *ChangeValue) (m, k, v *reflect.Value) {
 	//we must tease out the type of the key, we use the msgpack from diff to recreate the key
 	kt := c.target.Type().Key()
 	field := reflect.New(kt)
-	if err := msgpack.Unmarshal([]byte(c.change.Path[c.pos]), field.Interface()); err != nil {
+	decoded, err := base64.StdEncoding.DecodeString(c.change.Path[c.pos])
+	if err != nil {
+		c.SetFlag(FlagIgnored)
+		c.AddError(NewError("Unable to decode path bytes", err))
+		return
+	}
+	if err := msgpack.Unmarshal(decoded, field.Interface()); err != nil {
 		c.SetFlag(FlagIgnored)
 		c.AddError(NewError("Unable to unmarshal path element to target type for key in map", err))
 		return
