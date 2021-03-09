@@ -50,8 +50,8 @@ func (d *Differ) renderMap(c *ChangeValue) (m, k, v *reflect.Value) {
 //            type. Set values are more generic even if they must be instanced
 func (d *Differ) deleteMapEntry(c *ChangeValue, m, k, v *reflect.Value) {
 	if m != nil && m.CanSet() && v.IsValid() {
-		for x := 0; x < v.NumField(); x++ {
-			if !v.Field(x).IsZero() {
+		for _, x := range m.MapKeys() {
+			if !m.MapIndex(x).IsZero() {
 				m.SetMapIndex(*k, *v)
 				return
 			}
