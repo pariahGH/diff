@@ -7,10 +7,11 @@ package diff
 import (
 	"errors"
 	"fmt"
-	"github.com/vmihailenco/msgpack"
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/vmihailenco/msgpack"
 )
 
 const (
@@ -250,18 +251,18 @@ func swapChange(t string, c Change) Change {
 }
 
 func idComplex(v interface{}) string {
-	switch v.(type) {
+	/* switch v.(type) {
 	case string:
 		return v.(string)
 	case int:
 		return strconv.Itoa(v.(int))
-	default:
-		b, err := msgpack.Marshal(v)
-		if err != nil {
-			panic(err)
-		}
-		return string(b)
+	default: */
+	b, err := msgpack.Marshal(v)
+	if err != nil {
+		panic(err)
 	}
+	return string(b)
+	//}
 
 }
 func idstring(v interface{}) string {

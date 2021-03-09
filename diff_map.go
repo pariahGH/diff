@@ -6,8 +6,9 @@ package diff
 
 import (
 	"fmt"
-	"github.com/vmihailenco/msgpack"
 	"reflect"
+
+	"github.com/vmihailenco/msgpack"
 )
 
 func (d *Differ) diffMap(path []string, a, b reflect.Value) error {

@@ -1,8 +1,9 @@
 package diff
 
 import (
-	"github.com/vmihailenco/msgpack"
 	"reflect"
+
+	"github.com/vmihailenco/msgpack"
 )
 
 //renderMap - handle map rendering for patch
@@ -49,8 +50,8 @@ func (c *ChangeValue) renderMap() (m, k, v *reflect.Value) {
 //            type. Set values are more generic even if they must be instanced
 func (c *ChangeValue) deleteMapEntry(m, k, v *reflect.Value) {
 	if m != nil && m.CanSet() && v.IsValid() {
-		for x := 0; x < v.NumField(); x++ {
-			if !v.Field(x).IsZero() {
+		for _, x := range m.MapKeys() {
+			if !m.MapIndex(x).IsZero() {
 				m.SetMapIndex(*k, *v)
 				return
 			}
