@@ -1,4 +1,4 @@
-module github.com/r3labs/diff/v2
+module github.com/pariahGH/diff/fix
 
 go 1.13
 
